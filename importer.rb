@@ -13,7 +13,7 @@ def main
         :col_sep => ";",
         :strings_as_keys => true)
 
-    puts symptomes.size.to_s + " maladies imported"
+    puts maladies.size.to_s + " maladies imported"
 
     maladies do |maladie|
         puts "hello"
