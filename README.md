@@ -16,12 +16,17 @@ Even if it uses one gem, we are using the tool called "Bundler" to manage gems i
 ###### To run the script, do:
 
 gem install bundler
+
 => install the bundler
+
 bundle install
+
 => install the gems and produce Gemfile.lock
 
 (you can try the following commands to see more:
+
 bundle show
+
 bundle update)
 
 once this is done, just run
@@ -42,6 +47,7 @@ Exercice: fill this part of the README !
 Bundler is made to resolve dependencies between your gems so if you want to use, for example (fake numbers):
 
 gem rails version 0.3
+
 gem activerecord
 
 As rails 0.3 depends on activerecord version 0.1 and the current version of activerecord is 0.2, if you do something like this without bundler, rails will be broken because you overwrote the activerecord gem with the more recent one, and it is not necessarely backwards compatible.
