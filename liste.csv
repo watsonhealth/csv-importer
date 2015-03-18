@@ -1,4 +1,4 @@
-Maladie;Symptôme;Symptôme;Symptôme;Symptôme;Symptôme;Symptôme;Symptôme;Symptôme;Symptôme;Symptôme;Symptôme;Contexte;Incidence (cas/an);Prévalence;Antécédents
+Maladie;symptome1;symptome2;symptome3;symptome4;symptome5;symptome6;symptome7;symptome8;symptome9;symptome10;symptome11;Contexte;Incidence (cas/an);Prévalence;Antécédents
 Infection alimentaire;Diarrhée aïgue (2);Fièvre (1);Douleur abdominale (2/diffuse) ; Nausées (2);Vomissements (2);Sang dans les selles (2);;;;;;Aliments à risque / Cas dans l'entourage;15000;;
 Grippe;Malaise général;Fièvre (1);Frissons (1);Fatigue (1);Toux sèche (3);Nez qui coule (5);Mal à la gorge (4);Mal de tête diffus (6);Douleurs articulaires diffuses;Douleurs musculaires diffuses;;Epidémie / Cas dans l'entourage;2500000;;
 Hépatite aigue;Coloration jaune (10);Urines foncées (11);Selles décolorées (2);Fièvre (1);Fatigue (1);Douleur abdominale (2/1);;;;;;Rapport sexuel à risque / Voyage / Exposition sang;3500;;
