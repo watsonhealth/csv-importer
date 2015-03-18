@@ -8,12 +8,17 @@ def main
     puts "Hello Ruby ! It's been a long time"
     # check the smarter csv documentation
     # !!! Works only if the file is utf-8 encoded !!! (exported as csv via NUMBERS on Mac and NOT "save as " on Excel)
-    symptomes = SmarterCSV.process(
+    maladies = SmarterCSV.process(
         'liste.csv',
         :col_sep => ";",
         :strings_as_keys => true)
 
     puts symptomes.size.to_s + " maladies imported"
+
+    maladies do |maladie|
+        puts "hello"
+    end
+
 end
 
 main
