@@ -40,7 +40,6 @@ def main
         
         puts maladie_hash
 
-        
         # Create new maladie object
         mal = Maladie.new
 
