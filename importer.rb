@@ -26,25 +26,26 @@ def main
     puts "Hello Ruby ! It's been a long time"
     # check the smarter csv documentation
     # !!! Works only if the file is utf-8 encoded !!! (exported as csv via NUMBERS on Mac and NOT "save as " on Excel)
-    maladies = SmarterCSV.process(
+    maladies_csv = SmarterCSV.process(
         'liste.csv',
         :col_sep => ";",
         :strings_as_keys => true)
 
-    puts maladies.size.to_s + " maladies imported"
+    puts maladies_csv.size.to_s + " maladies imported"
 
-    maladies.each do |maladie|
-        puts maladie
+    maladies_csv.each do |maladie_hash|
+        puts maladie_hash
         # Parse maladie hash to fill the maladie object well
         
         # Create new maladie object
         mal = Maladie.new
-        mal.nom = maladie['maladie']
+        # the second 'maladie' is referring to the column name in the excel
+        mal.nom = maladie_hash['maladie']
         puts mal
 
         # find the keys matching "symptome" and pass their values to the add symptom method
         # 
-        maladie.each_key {|key| mal.add_symptom(maladie[key]) if key.include? "symptome"}
+        maladie_hash.each_key {|key| mal.add_symptom(maladie_hash[key]) if key.include? "symptome"}
 
         puts mal
     end
