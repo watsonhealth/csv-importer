@@ -7,7 +7,7 @@ require "smarter_csv"
 # (In rails it would be a Model)
 
 class Maladie
-  attr_accessor :nom, :symptomes, :prevalence, :contexte, :antecedents
+  attr_accessor :nom, :symptomes, :contexte, :incidence, :prevalence, :antecedents
   
   def add_symptom (symptome)
     # If symptomes is not defined we defined it as an array
@@ -17,8 +17,10 @@ class Maladie
   end  
   
   def to_s
-    puts "Je suis #{@nom ? @nom  : "sans nom"} et j'ai #{ @symptomes ? @symptomes.size.to_s : 0} symptomes"  
+    # Creates the standard string representation of the Maladie object
+    return "Je suis #{@nom ? @nom  : "sans nom"} et j'ai #{@symptomes ? @symptomes.size.to_s : 0} symptomes. Contexte : #{ @contexte || "non"}, inc: #{@incidence || "non"} prev: #{@prevalence || "non"} ant: #{@antecedents || "non"}" 
   end
+
 end  
 
 def main
@@ -34,23 +36,29 @@ def main
     puts maladies_csv.size.to_s + " maladies imported"
 
     maladies_csv.each do |maladie_hash|
-        puts maladie_hash
         # Parse maladie hash to fill the maladie object well
+        
+        puts maladie_hash
+
         
         # Create new maladie object
         mal = Maladie.new
-        # the second 'maladie' is referring to the column name in the excel
-        mal.nom = maladie_hash['maladie']
+
+        # the second part in ['  '] is referring to the column name in the excel
+        mal.nom         = maladie_hash['maladie']
+        mal.contexte    = maladie_hash['contexte']
+        mal.incidence   = maladie_hash['incidence']
+        mal.prevalence  = maladie_hash['prevalence']
+        mal.antecedents = maladie_hash['antecedents']
+
         puts mal
 
         # find the keys matching "symptome" and pass their values to the add symptom method
-        # 
-        maladie_hash.each_key do |key| 
-            mal.add_symptom(maladie_hash[key]) if key.include? "symptome"
-
+        maladie_hash.each_key { |key| mal.add_symptom(maladie_hash[key]) if key.include? "symptome" }
+        
         puts mal
-    end
 
+    end
 end
 
 main
