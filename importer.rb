@@ -45,7 +45,8 @@ def main
 
         # find the keys matching "symptome" and pass their values to the add symptom method
         # 
-        maladie_hash.each_key {|key| mal.add_symptom(maladie_hash[key]) if key.include? "symptome"}
+        maladie_hash.each_key do |key| 
+            mal.add_symptom(maladie_hash[key]) if key.include? "symptome"
 
         puts mal
     end
