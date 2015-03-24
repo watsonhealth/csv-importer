@@ -14,7 +14,7 @@ class Maladie
     @symptomes ||= []
     @symptomes.push(symptome)
     puts 'adding symptom...'
-  end  
+  end
   
   def to_s
     # Creates the standard string representation of the Maladie object
@@ -46,8 +46,9 @@ def main
         # the second part in ['  '] is referring to the column name in the excel
         mal.nom         = maladie_hash['maladie']
         mal.contexte    = maladie_hash['contexte']
-        mal.incidence   = maladie_hash['incidence']
-        mal.prevalence  = maladie_hash['prevalence']
+        mal.incidence   = maladie_hash['incidence'] ? maladie_hash['incidence'].to_i : nil
+        # Parse the prevalence to convert it to floating point number
+        mal.prevalence  = maladie_hash['prevalence'] ? maladie_hash['prevalence'].chop.sub(",", ".").to_f : nil
         mal.antecedents = maladie_hash['antecedents']
 
         puts mal
@@ -56,7 +57,6 @@ def main
         maladie_hash.each_key { |key| mal.add_symptom(maladie_hash[key]) if key.include? "symptome" }
         
         puts mal
-
     end
 end
 
