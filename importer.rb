@@ -3,8 +3,43 @@
 
 require "smarter_csv"
 
-# Define the maladie class (structure)
+# Define the maladie and symptome class (structure)
 # (In rails it would be a Model)
+
+class Symptome
+    attr_accessor :nom, :position, :specifics
+
+    # Ex: to get substring you need to use regex scanning
+    # String1 = "<name> <substring>"
+    # String1.scan( /<([^>]*)>/).last.first
+    # 
+    def initialize(sym_str)
+        # We get the name from the string first
+        @nom = sym_str.split(" (").first
+
+        # Then we get the parenthesis if it exists
+        parenth_scan = sym_str.scan(/\(([^>]*)\)/)
+        parenth = parenth_scan.first ? parenth_scan.first.first : nil
+
+        if parenth
+            # 2/1:3:4
+            @position = parenth.split("/").first
+
+            # Scan for 1:3:4 to get the number
+            parenth_sub = parenth.split("/").size == 2 ? parenth.split("/").last : ""
+
+            @specifics = parenth_sub.split(":")
+
+        else
+            @position = -1
+            @specifics ||= []
+        end
+    end
+
+    def to_s
+        return "Je suis #{@nom} positionne à #{@position} avec #{@specifics ? @specifics.size.to_s : 0} specificitees"
+    end
+end
 
 class Maladie
   attr_accessor :nom, :symptomes, :contexte, :incidence, :prevalence, :antecedents
@@ -12,8 +47,9 @@ class Maladie
   def add_symptom (symptome)
     # If symptomes is not defined we defined it as an array
     @symptomes ||= []
-    @symptomes.push(symptome)
-    puts 'adding symptom...'
+    sympt = Symptome.new(symptome)
+    @symptomes.push(sympt)
+    puts 'adding symptom...' + sympt.to_s
   end
   
   def to_s
